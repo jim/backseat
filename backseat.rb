@@ -3,12 +3,15 @@ require 'rjb'
 
 require File.expand_path(File.dirname(__FILE__) + '/backseat/element_wrapper')
 require File.expand_path(File.dirname(__FILE__) + '/backseat/driver')
+require File.expand_path(File.dirname(__FILE__) + '/backseat/xpath_helpers')
 
 module Backseat
   
   (class << self; self; end).class_eval do
     attr_accessor :webdriver_root
   end
+
+  include XpathHelpers
 
   module BridgedDrivers
     (class << self; self; end).class_eval do

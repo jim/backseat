@@ -1,8 +1,6 @@
-require 'forwardable'
-
 module Backseat
-  class Driver < ElementWrapper
-  
+  class Driver < AbstractWrapper
+    
     def initialize(driver=:htmlunit)
       @driver = case driver
       when :firefox: BridgedDrivers.firefox.new
@@ -11,8 +9,9 @@ module Backseat
       end
       @element = @driver
     end
-  
-    def_delegators :@driver, :get
-  
+    
+    def_chainable_delegator :@element, :get
+    def_delegator :@element, :getTitle, :get_title
+    
   end
 end

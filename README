@@ -1,0 +1,9 @@
+Backseat is a proof of concept that uses Rjb to directly interact with the WebDriver Java classes. I'm still thinking about the API, so no specs just yet.
+
+REQUIREMENTS:
+    rjb - sudo gem install rjb, if you're on a Mac go here: http://www.digitalsanctum.com/2008/02/02/gem-install-rjb-on-mac-os-x-leopard/
+    
+TODO:
+    Firefox driver
+    Safari driver
+    ...lots more
