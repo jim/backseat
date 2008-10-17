@@ -6,10 +6,6 @@ require File.expand_path(File.dirname(__FILE__) + '/backseat/driver')
 require File.expand_path(File.dirname(__FILE__) + '/backseat/xpath_helpers')
 
 module Backseat
-  
-  (class << self; self; end).class_eval do
-    attr_accessor :webdriver_root
-  end
 
   include XpathHelpers
 
@@ -21,15 +17,15 @@ module Backseat
     end
   end
 
-  def self.load!
+  def self.load!(webdriver_root=nil)
     
-    raise 'Please set Backseat.webdriver_root to the root of a built webdriver checkout' if @webdriver_root.nil?
+    raise 'load! must be called with the absolute path to a built webdriver checkout' if webdriver_root.nil?
     
     module_eval do
       libs = []
-      libs << @webdriver_root + '/common/build/webdriver-common.jar'
-      libs << @webdriver_root + '/htmlunit/build/webdriver-htmlunit.jar'
-      libs.concat(Dir[@webdriver_root + '/htmlunit/lib/runtime/*'])
+      libs << webdriver_root + '/common/build/webdriver-common.jar'
+      libs << webdriver_root + '/htmlunit/build/webdriver-htmlunit.jar'
+      libs.concat(Dir[webdriver_root + '/htmlunit/lib/runtime/*'])
 
       Rjb::load(libs.join(':'))
 
