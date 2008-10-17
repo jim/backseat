@@ -47,8 +47,10 @@ module Backseat
     end
   end
   
+  
+  # Expects to be passed a proc that will a boolean as :until
   def wait(options={})
-    proc = options[:until]
+    proc = options[:until] || lambda { true }
     max = options[:max] || 10
     elapsed = 0
     while !proc.call do

@@ -1,5 +1,7 @@
 module Backseat
   module XpathHelpers
+
+    TAGS = %w(h1 h2 h3 h4 h5 h6 div span img button input textarea ul ol li form a p object select table td tr)
     
     class XpathLocator < String
       
@@ -16,7 +18,7 @@ module Backseat
         XpathLocator.new(locator)
       end
       
-      %w(h1 h2 h3 h4 h5 h6 div span img button input textarea ul ol li form a p object select table td tr).each do |element|
+      TAGS.each do |element|
         class_eval do
           define_method(element) do |identifier|
             self.class.construct(element, self, identifier)
@@ -26,7 +28,7 @@ module Backseat
             
     end
       
-    %w(h1 h2 h3 h4 h5 h6 div span img button input textarea ul ol li form a p object select table td tr).each do |element|
+    TAGS.each do |element|
       module_eval do
         define_method(element) do |identifier|
           XpathLocator.construct(element, identifier)

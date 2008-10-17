@@ -1,5 +1,4 @@
 require 'backseat'
-
 include Backseat
 
 Backseat.load!('/Users/jimb/src/webdriver/trunk')
