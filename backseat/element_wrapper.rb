@@ -24,6 +24,11 @@ module Backseat
       @driver = driver
       @element = element
     end
+
+    def contains?(query)
+        query = by.xpath(query) if query.is_a? XpathLocator
+        @element.findElements(query).toArray.size > 0
+    end
     
     def find_element(query)
       query = by.xpath(query) if query.is_a? XpathLocator
@@ -71,6 +76,6 @@ module Backseat
     def_delegator :@element, :getValue, :value
     def_delegator :@element, :isSelected, :selected?
     def_delegator :@element, :isEnabled, :enabled?
-       
+    def_delegator :@element, :isDisplayed, :displayed?
   end
 end
