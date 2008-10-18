@@ -1,15 +1,18 @@
 require 'rubygems'
 require 'rjb'
 
-require File.expand_path(File.dirname(__FILE__) + '/backseat/element_wrapper')
-require File.expand_path(File.dirname(__FILE__) + '/backseat/driver')
-require File.expand_path(File.dirname(__FILE__) + '/backseat/xpath_helpers')
+require 'backseat/wrappers/abstract_wrapper'
+require 'backseat/wrappers/element_wrapper'
+require 'backseat/wrappers/driver_wrapper'
+require 'backseat/helpers/xpath_helper'
+require 'backseat/helpers/wait_helper'
 
 module Backseat
 
   class WaitTimeoutError < StandardError; end
 
-  include XpathHelpers
+  include Helpers::XpathHelper
+  include Helpers::WaitHelper
 
   module Bridged
     (class << self; self; end).class_eval do
@@ -47,19 +50,6 @@ module Backseat
     end
   end
   
-  
-  # Expects to be passed a proc that will a boolean as :until
-  def wait(options={})
-    proc = options[:until] || lambda { true }
-    max = options[:max] || 10
-    elapsed = 0
-    while !proc.call do
-      sleep 1
-      elapsed += 1
-      if elapsed == max
-        raise WaitTimeoutError, "waited #{max} seconds to no avail"
-      end
-    end
-  end
+  Driver = Backseat::Wrappers::DriverWrapper
   
 end

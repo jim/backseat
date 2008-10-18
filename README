@@ -1,7 +1,7 @@
 Backseat is a proof of concept that uses Rjb to directly interact with the WebDriver Java classes. I'm still thinking about the API, so no specs just yet.
 
 EXAMPLES:
-    Please see firefox_example.rb and htmlunit_example.rb for implementations of the 2 official WebDriver examples from http://code.google.com/p/webdriver/wiki/GettingStarted.
+    Please see firefox_example.rb and htmlunit_example.rb in the examples directory for implementations of the 2 official WebDriver examples from http://code.google.com/p/webdriver/wiki/GettingStarted.
 
 REQUIREMENTS:
     a working JVM- you may need to set your LD_LIBRARY_PATH http://rjb.rubyforge.org/
