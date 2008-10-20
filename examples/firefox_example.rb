@@ -1,7 +1,7 @@
 require 'backseat'
 include Backseat
 
-Backseat.load!('/Users/jimb/src/webdriver/trunk')
+Backseat.load!
 
 def wait_until_visible(element)
   wait :until => lambda { @driver.has_child?(element) &&

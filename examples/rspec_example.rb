@@ -5,7 +5,7 @@ include Backseat
 
 describe 'a simple test' do
   before(:all) do
-    Backseat.load!('/Users/jimb/src/webdriver/trunk')
+    Backseat.load!
     @driver = Backseat::Driver.new(:firefox)
   end
   

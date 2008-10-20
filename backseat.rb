@@ -25,7 +25,9 @@ module Backseat
 
   def self.load!(webdriver_root=nil)
     
-    raise 'load! must be called with the absolute path to a built webdriver checkout' if webdriver_root.nil?
+    webdriver_root ||= ENV['WEBDRIVER_ROOT']
+    
+    raise 'load! must be called with the absolute path to a built webdriver checkout or with a WEBDRIVER_ROOT env variable' if webdriver_root.nil?
     
     module_eval do
       libs = []

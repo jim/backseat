@@ -21,25 +21,26 @@ module Backseat
       attr :driver
       attr :element
     
-      def initialize(driver, element)
+      def initialize(driver, element, identifier)
         @driver = driver
         @element = element
+        @identifier = identifier
       end
 
       def has_child?(query)
-          query = by.xpath(query) if query.is_a? XpathLocator
-          @element.findElements(query).toArray.size > 0
+        standardized = query.is_a?(XpathLocator) ? by.xpath(append_locator(query)) : query
+        @element.findElements(standardized).toArray.size > 0
       end
     
       def find_element(query)
-        query = by.xpath(query) if query.is_a? XpathLocator
-        ElementWrapper.new(@driver, @element.findElement(query))
+        standardized = query.is_a?(XpathLocator) ? by.xpath(append_locator(query)) : query
+        ElementWrapper.new(@driver, @element.findElement(standardized), append_locator(query))
       end
     
       def find_elements(query)
-        query = by.xpath(query) if query.is_a? XpathLocator
-        @element.findElements(query).toArray.map do |element|
-          ElementWrapper.new(@driver, element)
+        standardized = query.is_a?(XpathLocator) ? by.xpath(append_locator(query)) : query
+        @element.findElements(standardized).toArray.map do |element|
+          ElementWrapper.new(@driver, element, append_locator(query))
         end
       end
     
@@ -61,6 +62,13 @@ module Backseat
     
       # this is mostly to support rspec's have matchers: have(x).elements(div(:class => 'huge'))
       alias :elements :find_elements
+      
+      protected
+      
+      def append_locator(suffix)
+        @identifier.nil? ? suffix : "#{@identifier}#{suffix}"
+      end
+      
     end
   end
 end

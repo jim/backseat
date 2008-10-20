@@ -1,7 +1,7 @@
 require 'backseat'
 include Backseat
 
-Backseat.load!('/Users/jimb/src/webdriver/trunk')
+Backseat.load!
 
 driver = Backseat::Driver.new(:htmlunit)
 

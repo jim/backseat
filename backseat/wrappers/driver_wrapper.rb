@@ -9,6 +9,7 @@ module Backseat
         else Bridged.htmlunit.new
         end
         @element = @driver
+        @identifier = nil
       end
     
       def_chainable_delegator :@element, :get

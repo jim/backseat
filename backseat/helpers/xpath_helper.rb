@@ -22,7 +22,7 @@ module Backseat
         TAGS.each do |tag|
           class_eval <<-STR
             def #{tag}(identifier={})
-              XpathLocator.construct('#{tag}', identifier)
+              XpathLocator.construct('#{tag}', self, identifier)
             end
           STR
         end
