@@ -2,7 +2,7 @@ require 'rubygems'
 require 'spec'
 
 require File.join(File.dirname(File.expand_path(__FILE__)), '/../lib/backseat')
-include Backseat
+include Backseat::Helpers
 
 def path_to_html(file)
   # TODO make this method safe for windows
