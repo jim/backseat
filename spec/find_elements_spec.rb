@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'spec'
-require 'backseat'
+
+require File.join(File.dirname(File.expand_path(__FILE__)), '/../lib/backseat')
 include Backseat
 
 def path_to_html(file)
@@ -11,7 +12,7 @@ end
 
 describe 'Finding Elements' do
   before(:all) do
-    Backseat.load!('/Users/jimb/src/webdriver/trunk')
+    Backseat.load!
     @driver = Backseat::Driver.new(:firefox)
     @driver.get(path_to_html('find_elements.html'))
   end
