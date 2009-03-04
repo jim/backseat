@@ -1,7 +1,7 @@
 module Backseat
   module Helpers
     module WaitHelper
-      # Expects to be passed a proc that will a boolean as :until
+      # Expects to be passed a proc that will return a boolean as :until
       def wait(options={})
         proc = options[:until] || lambda { true }
         max = options[:max] || 10

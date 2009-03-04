@@ -3,11 +3,16 @@ module Backseat
     class DriverWrapper < AbstractWrapper
     
       def initialize(driver=:htmlunit)
+        unless Backseat.loaded
+          raise BridgeLoadError.new('The Java libraries are not loaded. Did you call Backseat.load?') 
+        end
+
         @driver = case driver
         when :firefox: Bridged.firefox.new
         when :safari:  Bridged.safari.new
         else Bridged.htmlunit.new
         end
+        
         @element = @driver
         @identifier = nil
       end

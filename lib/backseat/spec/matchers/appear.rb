@@ -33,8 +33,8 @@ module Backseat
         end
       end
 
-      def appear(expected)
-        Appear.new(expected)
+      def appear
+        Appear.new(@driver)
       end
     end
   end

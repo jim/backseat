@@ -1,5 +1,5 @@
 require 'backseat'
-include Backseat
+include Backseat::Helpers
 
 Backseat.load!
 

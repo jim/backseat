@@ -5,16 +5,19 @@ $:.unshift(File.dirname(__FILE__))
 require 'backseat/wrappers/abstract_wrapper'
 require 'backseat/wrappers/element_wrapper'
 require 'backseat/wrappers/driver_wrapper'
+require 'backseat/helpers'
 require 'backseat/helpers/xpath_helper'
 require 'backseat/helpers/wait_helper'
-
+require 'backseat/helpers/by_helper'
 module Backseat
+
+  (class << self; self; end).class_eval do
+    attr_accessor :loaded
+  end
 
   class WaitTimeoutError < StandardError; end
   class ConfigurationError < StandardError; end
-
-  include Helpers::XpathHelper
-  include Helpers::WaitHelper
+  class BridgeLoadError < StandardError; end
 
   module Bridged
     (class << self; self; end).class_eval do
@@ -45,12 +48,13 @@ module Backseat
       Bridged.htmlunit = Rjb::import('org.openqa.selenium.htmlunit.HtmlUnitDriver')
       Bridged.firefox = Rjb::import('org.openqa.selenium.firefox.FirefoxDriver')
       Bridged.rendered_web_element = Rjb::import('org.openqa.selenium.RenderedWebElement')
-    end
-    
-    class_eval do
-      def by
-        Rjb::import('org.openqa.selenium.By')
+      
+      if Bridged.htmlunit.nil?
+        raise ConfigurationError.new('The htmlunit Java library could not be loaded!') 
       end
+      
+      self.loaded = true
+      
     end
   end
   

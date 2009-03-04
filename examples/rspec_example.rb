@@ -1,7 +1,8 @@
 require 'rubygems'
 require 'spec'
 require 'backseat'
-include Backseat
+
+include Backseat::Helpers
 
 describe 'a simple test' do
   before(:all) do
