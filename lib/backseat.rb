@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'rjb'
 
-$:.unshift(File.dirname(__FILE__))
+$LOAD_PATH.unshift(File.expand_path(File.dirname(__FILE__))) unless $LOAD_PATH.include?(File.expand_path(File.dirname(__FILE__)))
 require 'backseat/wrappers/abstract_wrapper'
 require 'backseat/wrappers/element_wrapper'
 require 'backseat/wrappers/driver_wrapper'
@@ -9,7 +9,11 @@ require 'backseat/helpers'
 require 'backseat/helpers/xpath_helper'
 require 'backseat/helpers/wait_helper'
 require 'backseat/helpers/by_helper'
+require 'backseat/server'
+
 module Backseat
+  
+  VERSION = '0.0.2'
 
   (class << self; self; end).class_eval do
     attr_accessor :loaded

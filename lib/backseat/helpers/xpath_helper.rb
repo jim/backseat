@@ -37,6 +37,26 @@ module Backseat
         STR
       end
      
+      class XpathFunction
+        def initialize(value)
+          @value = value
+        end
+        
+        def escape(string)
+          string.gsub("'", "\'")
+        end 
+      end
+      
+      class Contains < XpathFunction
+        def to_xpath(attribute)
+          "contains(#{attribute}, '#{escape(@value)}')"
+        end
+      end
+
+      def contains(value)
+        Contains.new(value)
+      end
+     
     end
   end
 end
